@@ -1,0 +1,731 @@
+{
+  "track": "Backend",
+  "data": [
+    {
+      "Topic": "Internet",
+      "sub-topics": [
+        {
+          "name": "How does the internet work ?",
+          "resources": [
+            "https://cs.fyi/guide/how-does-the-internet-work",
+            "https://www.vox.com/2014/6/16/18076282/the-internet",
+            "https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/How_does_the_Internet_work"
+          ]
+        },
+        {
+          "name": "What is HTTP?",
+          "resources": [
+            "https://roadmap.sh/guides/journey-to-http2",
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP",
+            "https://www.rfc-editor.org/rfc/rfc9110"
+          ]
+        },
+        {
+          "name": "What is Domain Name?",
+          "resources": [
+            "https://www.cloudflare.com/learning/dns/glossary/what-is-a-domain-name/",
+            "https://developer.mozilla.org/en-US/docs/Glossary/DNS"
+          ]
+        },
+        {
+          "name": "What is hosting?",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server",
+            "https://www.cloudflare.com/learning/performance/what-is-web-hosting/"
+          ]
+        },
+        {
+          "name": "DNS and how it works?",
+          "resources": [
+            "https://roadmap.sh/guides/dns-in-one-picture",
+            "https://www.cloudflare.com/learning/dns/what-is-dns/",
+            "https://developer.mozilla.org/en-US/docs/Glossary/DNS"
+          ]
+        },
+        {
+          "name": "Browsers and how they work?",
+          "resources": [
+            "https://web.dev/articles/howbrowserswork",
+            "https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Version Control Systems",
+      "sub-topics": [
+        {
+          "name": "Git",
+          "resources": [
+            "https://git-scm.com/doc",
+            "https://git-scm.com/book/en/v2",
+            "https://git-scm.com/docs"
+          ]
+        },
+        {
+          "name": "Repo Hosting Services",
+          "resources": [
+            "https://docs.github.com/",
+            "https://docs.gitlab.com/",
+            "https://support.atlassian.com/bitbucket-cloud/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Relational Databases",
+      "sub-topics": [
+        {
+          "name": "Relational Databases",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Relational_database",
+            "https://www.w3schools.com/sql/",
+            "https://www.postgresql.org/docs/current/tutorial.html"
+          ]
+        },
+        {
+          "name": "SQL",
+          "resources": [
+            "https://www.w3schools.com/sql/",
+            "https://www.postgresql.org/docs/current/tutorial.html",
+            "https://sqlbolt.com/"
+          ]
+        },
+        {
+          "name": "CRUD Operations",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Glossary/CRUD",
+            "https://www.mongodb.com/docs/manual/crud/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Caching",
+      "sub-topics": [
+        {
+          "name": "Server Side",
+          "resources": [
+            "https://roadmap.sh/guides/http-caching",
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching"
+          ]
+        },
+        {
+          "name": "CDN",
+          "resources": [
+            "https://www.cloudflare.com/learning/cdn/what-is-a-cdn/",
+            "https://developer.mozilla.org/en-US/docs/Glossary/CDN"
+          ]
+        },
+        {
+          "name": "Client Side",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching",
+            "https://roadmap.sh/guides/http-caching"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Learn about APIs",
+      "sub-topics": [
+        {
+          "name": "HATEOAS",
+          "resources": [
+            "https://restfulapi.net/hateoas/",
+            "https://en.wikipedia.org/wiki/HATEOAS"
+          ]
+        },
+        {
+          "name": "Open API Specs",
+          "resources": [
+            "https://spec.openapis.org/oas/latest.html",
+            "https://www.openapis.org/"
+          ]
+        },
+        {
+          "name": "REST",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Glossary/REST",
+            "https://restfulapi.net/",
+            "https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm"
+          ]
+        },
+        {
+          "name": "JSON APIs",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Glossary/JSON",
+            "https://www.json.org/json-en.html"
+          ]
+        },
+        {
+          "name": "SOAP",
+          "resources": [
+            "https://www.w3.org/TR/soap/",
+            "https://en.wikipedia.org/wiki/SOAP"
+          ]
+        },
+        {
+          "name": "gRPC",
+          "resources": [
+            "https://grpc.io/docs/",
+            "https://learn.microsoft.com/en-us/aspnet/core/grpc/"
+          ]
+        },
+        {
+          "name": "GraphQL",
+          "resources": [
+            "https://graphql.org/learn/",
+            "https://spec.graphql.org/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Authentication",
+      "sub-topics": [
+        {
+          "name": "JWT",
+          "resources": [
+            "https://roadmap.sh/guides/jwt-authentication",
+            "https://jwt.io/introduction",
+            "https://www.rfc-editor.org/rfc/rfc7519"
+          ]
+        },
+        {
+          "name": "OAuth",
+          "resources": [
+            "https://roadmap.sh/guides/oauth",
+            "https://oauth.net/2/",
+            "https://www.rfc-editor.org/rfc/rfc6749"
+          ]
+        },
+        {
+          "name": "Basic Authentication",
+          "resources": [
+            "https://roadmap.sh/guides/basic-authentication",
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication"
+          ]
+        },
+        {
+          "name": "Token Authentication",
+          "resources": [
+            "https://roadmap.sh/guides/token-based-authentication",
+            "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+          ]
+        },
+        {
+          "name": "Cookie Based Auth",
+          "resources": [
+            "https://roadmap.sh/guides/session-based-authentication-visually-explained",
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies"
+          ]
+        },
+        {
+          "name": "OpenID / SAML",
+          "resources": [
+            "https://openid.net/developers/how-connect-works/",
+            "https://www.oasis-open.org/standards/#samlv2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Web Security",
+      "sub-topics": [
+        {
+          "name": "Hashing Algorithms",
+          "resources": [
+            "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
+            "https://en.wikipedia.org/wiki/Cryptographic_hash_function"
+          ]
+        },
+        {
+          "name": "HTTPS",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS",
+            "https://www.cloudflare.com/learning/ssl/what-is-https/"
+          ]
+        },
+        {
+          "name": "OWASP Risks",
+          "resources": [
+            "https://owasp.org/www-project-top-ten/",
+            "https://cheatsheetseries.owasp.org/"
+          ]
+        },
+        {
+          "name": "CORS",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS",
+            "https://web.dev/articles/cross-origin-resource-sharing"
+          ]
+        },
+        {
+          "name": "SSL/TLS",
+          "resources": [
+            "https://roadmap.sh/guides/ssl-vs-tls-vs-ssh",
+            "https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/"
+          ]
+        },
+        {
+          "name": "CSP / Server Security / API Security",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP",
+            "https://owasp.org/API-Security/",
+            "https://cheatsheetseries.owasp.org/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Testing",
+      "sub-topics": [
+        {
+          "name": "Integration Testing",
+          "resources": [
+            "https://martinfowler.com/bliki/IntegrationTest.html",
+            "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Testing"
+          ]
+        },
+        {
+          "name": "Unit Testing",
+          "resources": ["https://martinfowler.com/bliki/UnitTest.html"]
+        },
+        {
+          "name": "Functional Testing",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Testing"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "CI / CD",
+      "sub-topics": [
+        {
+          "name": "CI / CD",
+          "resources": [
+            "https://roadmap.sh/guides/what-is-ci-and-cd",
+            "https://martinfowler.com/articles/continuousIntegration.html",
+            "https://docs.gitlab.com/ee/ci/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "More about Databases",
+      "sub-topics": [
+        {
+          "name": "ORMs",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping"
+          ]
+        },
+        {
+          "name": "ACID",
+          "resources": [
+            "https://en.wikipedia.org/wiki/ACID",
+            "https://www.postgresql.org/docs/current/tutorial-transactions.html"
+          ]
+        },
+        {
+          "name": "Transactions",
+          "resources": [
+            "https://www.postgresql.org/docs/current/tutorial-transactions.html"
+          ]
+        },
+        {
+          "name": "N+1 Problem",
+          "resources": [
+            "https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem"
+          ]
+        },
+        {
+          "name": "Normalization",
+          "resources": ["https://en.wikipedia.org/wiki/Database_normalization"]
+        },
+        {
+          "name": "Failure Modes",
+          "resources": [
+            "https://www.postgresql.org/docs/current/high-availability.html"
+          ]
+        },
+        {
+          "name": "Profiling Performance",
+          "resources": [
+            "https://www.postgresql.org/docs/current/using-explain.html"
+          ]
+        },
+        {
+          "name": "Migrations",
+          "resources": ["https://martinfowler.com/articles/evodb.html"]
+        }
+      ]
+    },
+    {
+      "Topic": "Scaling Databases",
+      "sub-topics": [
+        {
+          "name": "Database Indexes",
+          "resources": [
+            "https://www.postgresql.org/docs/current/indexes.html",
+            "https://use-the-index-luke.com/"
+          ]
+        },
+        {
+          "name": "Data Replication",
+          "resources": [
+            "https://www.postgresql.org/docs/current/runtime-config-replication.html"
+          ]
+        },
+        {
+          "name": "Sharding Strategies",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Shard_(database_architecture)"
+          ]
+        },
+        {
+          "name": "CAP Theorem",
+          "resources": [
+            "https://en.wikipedia.org/wiki/CAP_theorem",
+            "https://dl.acm.org/doi/10.1145/1394127.1394128"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Software Design & Architecture",
+      "sub-topics": [
+        {
+          "name": "GOF Design Patterns",
+          "resources": [
+            "https://refactoring.guru/design-patterns",
+            "https://roadmap.sh/guides/design-patterns-for-humans"
+          ]
+        },
+        {
+          "name": "Domain Driven Design",
+          "resources": [
+            "https://martinfowler.com/bliki/DomainDrivenDesign.html",
+            "https://www.domainlanguage.com/ddd/reference/"
+          ]
+        },
+        {
+          "name": "Test Driven Development",
+          "resources": [
+            "https://martinfowler.com/bliki/TestDrivenDevelopment.html"
+          ]
+        },
+        {
+          "name": "CQRS",
+          "resources": ["https://martinfowler.com/bliki/CQRS.html"]
+        },
+        {
+          "name": "Event Sourcing",
+          "resources": ["https://martinfowler.com/eaaDev/EventSourcing.html"]
+        }
+      ]
+    },
+    {
+      "Topic": "Containerization vs Virtualization",
+      "sub-topics": [
+        {
+          "name": "Containerization",
+          "resources": [
+            "https://docs.docker.com/get-started/docker-overview/",
+            "https://www.redhat.com/en/topics/containers"
+          ]
+        },
+        {
+          "name": "Virtualization",
+          "resources": [
+            "https://www.redhat.com/en/topics/virtualization/what-is-virtualization"
+          ]
+        },
+        {
+          "name": "Container Images",
+          "resources": [
+            "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/"
+          ]
+        },
+        {
+          "name": "Container Networking",
+          "resources": ["https://docs.docker.com/engine/network/"]
+        },
+        {
+          "name": "Container Storage",
+          "resources": ["https://docs.docker.com/engine/storage/"]
+        }
+      ]
+    },
+    {
+      "Topic": "Architectural Patterns",
+      "sub-topics": [
+        {
+          "name": "Monolithic Apps",
+          "resources": ["https://martinfowler.com/bliki/MonolithFirst.html"]
+        },
+        {
+          "name": "Microservices",
+          "resources": [
+            "https://martinfowler.com/articles/microservices.html",
+            "https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices"
+          ]
+        },
+        {
+          "name": "SOA",
+          "resources": ["https://www.ibm.com/think/topics/soa"]
+        },
+        {
+          "name": "Serverless",
+          "resources": [
+            "https://aws.amazon.com/serverless/",
+            "https://www.cloudflare.com/learning/serverless/what-is-serverless/"
+          ]
+        },
+        {
+          "name": "Service Mesh",
+          "resources": [
+            "https://cloud.google.com/architecture/service-meshes-in-a-microservices-architecture"
+          ]
+        },
+        { "name": "Twelve Factor Apps", "resources": ["https://12factor.net/"] }
+      ]
+    },
+    {
+      "Topic": "Web Servers",
+      "sub-topics": [
+        {
+          "name": "Web Servers",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server",
+            "https://en.wikipedia.org/wiki/Web_server"
+          ]
+        },
+        {
+          "name": "Reverse Proxy",
+          "resources": [
+            "https://roadmap.sh/guides/proxy-servers",
+            "https://developer.mozilla.org/en-US/docs/Glossary/Reverse_proxy",
+            "https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/"
+          ]
+        },
+        {
+          "name": "Request Routing",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Glossary/Routing"
+          ]
+        },
+        {
+          "name": "Load Balancing",
+          "resources": [
+            "https://www.cloudflare.com/learning/performance/what-is-load-balancing/"
+          ]
+        },
+        {
+          "name": "Web Server Configuration",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Search Engines",
+      "sub-topics": [
+        {
+          "name": "Search Engines",
+          "resources": [
+            "https://www.google.com/search/howsearchworks/",
+            "https://en.wikipedia.org/wiki/Search_engine"
+          ]
+        },
+        {
+          "name": "Full-Text Search",
+          "resources": [
+            "https://www.postgresql.org/docs/current/textsearch.html"
+          ]
+        },
+        {
+          "name": "Search Indexing",
+          "resources": ["https://en.wikipedia.org/wiki/Inverted_index"]
+        },
+        {
+          "name": "Search Queries",
+          "resources": ["https://en.wikipedia.org/wiki/Information_retrieval"]
+        },
+        {
+          "name": "Search Ranking",
+          "resources": [
+            "https://www.google.com/search/howsearchworks/how-search-works/ranking-results/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Message Brokers",
+      "sub-topics": [
+        {
+          "name": "Message Brokers",
+          "resources": [
+            "https://www.redhat.com/en/topics/integration/what-is-a-message-broker"
+          ]
+        },
+        {
+          "name": "Message Queues",
+          "resources": [
+            "https://aws.amazon.com/message-queue/",
+            "https://en.wikipedia.org/wiki/Message_queue"
+          ]
+        },
+        {
+          "name": "Event Streaming",
+          "resources": ["https://www.confluent.io/learn/event-streaming/"]
+        },
+        {
+          "name": "Publish / Subscribe",
+          "resources": [
+            "https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber"
+          ]
+        },
+        {
+          "name": "Message Delivery",
+          "resources": [
+            "https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/messaging"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Real-Time Data",
+      "sub-topics": [
+        {
+          "name": "Server Sent Events",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events",
+            "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events"
+          ]
+        },
+        {
+          "name": "WebSockets",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Web/API/WebSocket",
+            "https://www.rfc-editor.org/rfc/rfc6455"
+          ]
+        },
+        {
+          "name": "Long Polling",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Push_technology#Long_polling"
+          ]
+        },
+        {
+          "name": "Short Polling",
+          "resources": [
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+          ]
+        },
+        {
+          "name": "Real-Time Communication",
+          "resources": [
+            "https://roadmap.sh/network-engineer/websocket-vs-http",
+            "https://developer.mozilla.org/en-US/docs/Web/API/WebSocket"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "NoSQL Databases",
+      "sub-topics": [
+        {
+          "name": "Document DBs",
+          "resources": [
+            "https://www.mongodb.com/resources/basics/databases/document-databases"
+          ]
+        },
+        {
+          "name": "Key-Value",
+          "resources": ["https://aws.amazon.com/nosql/key-value/"]
+        },
+        {
+          "name": "Realtime",
+          "resources": ["https://firebase.google.com/docs/database"]
+        },
+        {
+          "name": "Time Series",
+          "resources": ["https://en.wikipedia.org/wiki/Time_series_database"]
+        },
+        {
+          "name": "Column DBs",
+          "resources": ["https://en.wikipedia.org/wiki/Wide-column_store"]
+        },
+        {
+          "name": "Graph DBs",
+          "resources": [
+            "https://neo4j.com/docs/getting-started/graph-database/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Building For Scale",
+      "sub-topics": [
+        {
+          "name": "Migration Strategies",
+          "resources": ["https://martinfowler.com/articles/evodb.html"]
+        },
+        {
+          "name": "Types of Scaling",
+          "resources": [
+            "https://docs.aws.amazon.com/wellarchitected/latest/framework/performance-efficiency.html",
+            "https://www.redhat.com/en/topics/cloud-computing/what-is-cloud-scalability"
+          ]
+        },
+        {
+          "name": "Mitigation Strategies",
+          "resources": [
+            "https://martinfowler.com/bliki/CircuitBreaker.html",
+            "https://www.cloudflare.com/learning/bots/what-is-rate-limiting/",
+            "https://www.reactive-streams.org/"
+          ]
+        },
+        {
+          "name": "Instrumentation / Monitoring / Telemetry",
+          "resources": [
+            "https://opentelemetry.io/docs/",
+            "https://opentelemetry.io/docs/concepts/observability-primer/"
+          ]
+        },
+        {
+          "name": "Metrics, Logging and Debugging",
+          "resources": [
+            "https://opentelemetry.io/docs/concepts/signals/logs/",
+            "https://opentelemetry.io/docs/concepts/signals/metrics/",
+            "https://opentelemetry.io/docs/concepts/signals/traces/"
+          ]
+        },
+        {
+          "name": "Observability",
+          "resources": [
+            "https://opentelemetry.io/docs/concepts/observability-primer/",
+            "https://cloud.google.com/stackdriver/docs/concepts/observability"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Basic Infrastructure Knowledge",
+      "sub-topics": [
+        {
+          "name": "Basic Infrastructure Knowledge",
+          "resources": [
+            "https://docs.kernel.org/",
+            "https://linuxjourney.com/",
+            "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+          ]
+        }
+      ]
+    }
+  ]
+}
