@@ -727,5 +727,702 @@
         }
       ]
     }
+  ],
+  "track": "Software Architect",
+  "data": [
+    {
+      "Topic": "Understand the Basics",
+      "sub-topics": [
+        {
+          "name": "What is Software Architecture",
+          "resources": [
+            "https://www.computer.org/resources/software-architecture",
+            "https://www.infoq.com/articles/what-software-architecture/"
+          ]
+        },
+        {
+          "name": "What is a Software Architect",
+          "resources": [
+            "https://www.redhat.com/architect/what-is-software-architect"
+          ]
+        },
+        {
+          "name": "Levels of Architecture",
+          "resources": []
+        },
+        {
+          "name": "Application Architecture",
+          "resources": [
+            "https://www.codesee.io/learning-center/application-architecture"
+          ]
+        },
+        {
+          "name": "Solution Architecture",
+          "resources": [
+            "https://www.leanix.net/en/wiki/it-architecture/solution-architecture"
+          ]
+        },
+        {
+          "name": "Enterprise Architecture",
+          "resources": [
+            "https://medium.com/@hsienwei/enterprise-software-architecture-957288829daa",
+            "https://www.linkedin.com/pulse/enterprise-architect-vs-software-who-you-luigi-saggese/",
+            "https://app.daily.dev/tags/architecture?ref=roadmapsh"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Responsibilities",
+      "sub-topics": [
+        {
+          "name": "Tech Decisions",
+          "resources": []
+        },
+        {
+          "name": "Design & Architecture Decisions",
+          "resources": []
+        },
+        {
+          "name": "Requirements Elicitation",
+          "resources": []
+        },
+        {
+          "name": "Documentation",
+          "resources": []
+        },
+        {
+          "name": "Enforcing Standards",
+          "resources": []
+        },
+        {
+          "name": "Collaborate with Others",
+          "resources": []
+        },
+        {
+          "name": "Consult & Coach Developers",
+          "resources": []
+        }
+      ]
+    },
+    {
+      "Topic": "Important Skills to Learn",
+      "sub-topics": [
+        {
+          "name": "Design & Architecture",
+          "resources": [
+            "https://roadmap.sh/software-design-architecture",
+            "https://github.com/nilbuild/design-patterns-for-humans"
+          ]
+        },
+        {
+          "name": "Decision Making",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Decision-making"
+          ]
+        },
+        {
+          "name": "Simplifying Things",
+          "resources": [
+            "https://www.infoq.com/articles/driving-architectural-simplicity/"
+          ]
+        },
+        {
+          "name": "How to Code",
+          "resources": [
+            "https://www.freecodecamp.org/news/how-to-code-coding-for-beginners-and-how-to-learn-programming-for-free/",
+            "https://www.thoughtworks.com/radar"
+          ]
+        },
+        {
+          "name": "Documentation",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Documentation",
+            "https://www.workingsoftware.dev/software-architecture-documentation-the-ultimate-guide/"
+          ]
+        },
+        {
+          "name": "Communication",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Communication"
+          ]
+        },
+        {
+          "name": "Estimate and Evaluate",
+          "resources": [
+            "https://medium.com/oolooroo/evaluating-digital-architectures-a-deep-dive-into-modern-software-systems-analysis-dff3b0d2da8f",
+            "https://www.linkedin.com/advice/0/what-most-common-software-architecture-evaluation"
+          ]
+        },
+        {
+          "name": "Balance",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Balance_(architecture"
+          ]
+        },
+        {
+          "name": "Consult & Coach",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Consulting"
+          ]
+        },
+        {
+          "name": "Marketing Skills",
+          "resources": [
+            "https://openasset.com/blog/marketing-for-architects/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Patterns & Design Principles",
+      "sub-topics": [
+        {
+          "name": "MVC, MVP, MVVM",
+          "resources": [
+            "https://medium.com/@ankit.sinhal/mvc-mvp-and-mvvm-design-pattern-6e169567bbad",
+            "https://app.daily.dev/tags/general-programming?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "CQRS, Eventual Consistency",
+          "resources": [
+            "https://martinfowler.com/bliki/CQRS.html",
+            "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs"
+          ]
+        },
+        {
+          "name": "OOP",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Object-oriented_programming",
+            "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming"
+          ]
+        },
+        {
+          "name": "Actors",
+          "resources": [
+            "https://www.brianstorti.com/the-actor-model/"
+          ]
+        },
+        {
+          "name": "ACID, CAP Theorem",
+          "resources": [
+            "https://www.bmc.com/blogs/cap-theorem/",
+            "https://en.wikipedia.org/wiki/CAP_theorem",
+            "https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/",
+            "https://www.ibm.com/uk-en/cloud/learn/cap-theorem",
+            "https://en.wikipedia.org/wiki/ACID"
+          ]
+        },
+        {
+          "name": "SOLID",
+          "resources": [
+            "https://www.baeldung.com/solid-principles",
+            "https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design"
+          ]
+        },
+        {
+          "name": "TDD",
+          "resources": [
+            "https://www.guru99.com/test-driven-development.html",
+            "https://www.ibm.com/garage/method/practices/code/practice_test_driven_development/",
+            "https://app.daily.dev/tags/tdd?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "DDD",
+          "resources": [
+            "https://github.com/ddd-crew/ddd-starter-modelling-process/",
+            "https://web.archive.org/web/20230606035225/https://matfrs2.github.io/RS2/predavanja/literatura/Avram%20A,%20Marinescu%20F.%20-%20Domain%20Driven%20Design%20Quickly.pdf",
+            "https://app.daily.dev/tags/architecture?ref=roadmapsh"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Tools",
+      "sub-topics": [
+        {
+          "name": "Git",
+          "resources": [
+            "https://roadmap.sh/git-github",
+            "https://antonz.org/git-by-example/",
+            "https://thenewstack.io/tutorial-git-for-absolutely-everyone/"
+          ]
+        },
+        {
+          "name": "Repo Hosting Services",
+          "resources": [
+            "https://roadmap.sh/git-github",
+            "https://github.com",
+            "https://docs.github.com/en/get-started/quickstart/hello-world",
+            "https://docs.github.com/en/get-started/quickstart",
+            "https://skills.github.com/",
+            "https://app.daily.dev/tags/github?ref=roadmapsh"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Architecture",
+      "sub-topics": [
+        {
+          "name": "Microservices",
+          "resources": [
+            "https://microservices.io/patterns/microservices.html",
+            "https://smartbear.com/solutions/microservices/",
+            "https://thenewstack.io/microservices-101/",
+            "https://thenewstack.io/primer-microservices-explained/",
+            "https://thenewstack.io/category/microservices/"
+          ]
+        },
+        {
+          "name": "Serverless",
+          "resources": [
+            "https://aws.amazon.com/lambda/serverless-architectures-learn-more/",
+            "https://martinfowler.com/articles/serverless.html"
+          ]
+        },
+        {
+          "name": "Client / Server",
+          "resources": [
+            "https://www.simplilearn.com/what-is-client-server-architecture-article"
+          ]
+        },
+        {
+          "name": "Layered",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Layered_architecture"
+          ]
+        },
+        {
+          "name": "Distributed Systems",
+          "resources": [
+            "https://www.distributed-systems.net/index.php/books/ds3/",
+            "https://estuary.dev/distributed-architecture/",
+            "https://app.daily.dev/tags/architecture?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "Service Oriented",
+          "resources": [
+            "https://aws.amazon.com/what-is/service-oriented-architecture/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Security",
+      "sub-topics": [
+        {
+          "name": "Hashing Algorithms",
+          "resources": [
+            "https://www.codecademy.com/resources/blog/what-is-hashing/"
+          ]
+        },
+        {
+          "name": "PKI",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Public_key_infrastructure",
+            "https://public.cyber.mil/pki-pke/"
+          ]
+        },
+        {
+          "name": "OWASP",
+          "resources": [
+            "https://github.com/0xRadi/OWASP-Web-Checklist",
+            "https://en.wikipedia.org/wiki/OWASP",
+            "https://sucuri.net/guides/owasp-top-10-security-vulnerabilities-2021/",
+            "https://cheatsheetseries.owasp.org/cheatsheets/AJAX_Security_Cheat_Sheet.html"
+          ]
+        },
+        {
+          "name": "Auth Strategies",
+          "resources": [
+            "https://auth0.com/resources/ebooks/jwt-handbook",
+            "https://www.cerbos.dev/blog/authentication-vs-authorization"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Working with Data",
+      "sub-topics": [
+        {
+          "name": "MapReduce",
+          "resources": [
+            "https://spark.apache.org/",
+            "https://www.integrate.io/blog/apache-spark-vs-hadoop-mapreduce",
+            "https://app.daily.dev/tags/spark?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "ETL, Datawarehouses",
+          "resources": [
+            "https://www.snowflake.com/guides/what-etl",
+            "https://app.daily.dev/tags/etl?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "SQL Databases",
+          "resources": [
+            "https://roadmap.sh/sql",
+            "https://aws.amazon.com/what-is/sql/",
+            "https://www.openlogic.com/blog/what-sql-database",
+            "https://app.daily.dev/tags/sql?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "NoSQL Databases",
+          "resources": [
+            "https://aws.amazon.com/nosql/",
+            "https://www.mongodb.com/resources/basics/databases/nosql-explained"
+          ]
+        },
+        {
+          "name": "Analytics",
+          "resources": [
+            "https://spark.apache.org/",
+            "https://hadoop.apache.org/",
+            "https://en.wikipedia.org/wiki/Apache_Hadoop",
+            "https://app.daily.dev/tags/apache-hadoop?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "Datawarehouse Principles",
+          "resources": [
+            "https://www.toptal.com/data-science/data-warehouse-concepts-principles"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Web, Mobile",
+      "sub-topics": [
+        {
+          "name": "Reactive Programming",
+          "resources": [
+            "https://www.techtarget.com/searchapparchitecture/definition/reactive-programming"
+          ]
+        },
+        {
+          "name": "Functional Programming",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Functional_programming",
+            "https://www.telerik.com/blogs/functional-programming-javascript"
+          ]
+        },
+        {
+          "name": "Frontend Frameworks",
+          "resources": [
+            "https://roadmap.sh/react",
+            "https://roadmap.sh/vue",
+            "https://roadmap.sh/angular"
+          ]
+        },
+        {
+          "name": "SPA, SSR, SSG",
+          "resources": [
+            "https://medium.com/codex/web-design-patterns-ssr-ssg-and-spa-fadad7673dfe",
+            "https://web.dev/rendering-on-the-web/"
+          ]
+        },
+        {
+          "name": "Microfrontends",
+          "resources": [
+            "https://micro-frontends.org/"
+          ]
+        },
+        {
+          "name": "W3C and WHATWG",
+          "resources": [
+            "https://www.w3.org/standards/",
+            "https://spec.whatwg.org/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "APIs & Integrations",
+      "sub-topics": [
+        {
+          "name": "gRPC",
+          "resources": [
+            "https://grpc.io/",
+            "https://grpc.io/docs/what-is-grpc/introduction/",
+            "https://grpc.io/docs/what-is-grpc/core-concepts/"
+          ]
+        },
+        {
+          "name": "ESB, SOAP",
+          "resources": [
+            "https://mariomthree.medium.com/understanding-soap-the-old-guard-of-web-services-6ca89d8ec312",
+            "https://en.wikipedia.org/wiki/Enterprise_service_bus",
+            "https://www.ibm.com/topics/esb"
+          ]
+        },
+        {
+          "name": "REST",
+          "resources": [
+            "https://www.redhat.com/en/topics/api/what-is-a-rest-api",
+            "https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm",
+            "https://restapitutorial.com/",
+            "https://app.daily.dev/tags/rest-api?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "GraphQL",
+          "resources": [
+            "https://roadmap.sh/graphql",
+            "https://graphql.org/learn/",
+            "https://thenewstack.io/introduction-to-graphql/",
+            "https://thenewstack.io/how-to-execute-a-simple-graphql-query/"
+          ]
+        },
+        {
+          "name": "BPM, BPEL",
+          "resources": [
+            "https://www.redhat.com/en/topics/automation/what-is-business-process-management",
+            "https://www.ibm.com/docs/en/baw/19.x?topic=SS8JB4_19.x/com.ibm.wbpm.wid.main.doc/prodoverview/topics/cbpelproc.html"
+          ]
+        },
+        {
+          "name": "Messaging Queues",
+          "resources": [
+            "https://aws.amazon.com/message-queue/",
+            "https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_message_queues.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Frameworks",
+      "sub-topics": [
+        {
+          "name": "BABOK",
+          "resources": [
+            "https://www.iiba.org/career-resources/a-business-analysis-professionals-foundation-for-success/babok/",
+            "https://en.wikipedia.org/wiki/A_Guide_to_the_Business_Analysis_Body_of_Knowledge"
+          ]
+        },
+        {
+          "name": "IAF",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Integrated_Architecture_Framework",
+            "https://www.capgemini.com/wp-content/uploads/2018/03/architecture-for-the-information-age.pdf"
+          ]
+        },
+        {
+          "name": "UML",
+          "resources": [
+            "https://www.uml.org",
+            "https://www.ibm.com/docs/en/rational-soft-arch/9.6.1?topic=files-uml-pattern-frameworks",
+            "https://personal.utdallas.edu/~chung/Fujitsu/UML_2.0/Rumbaugh--UML_2.0_Reference_CD.pdf",
+            "https://en.wikipedia.org/wiki/Unified_Modeling_Language"
+          ]
+        },
+        {
+          "name": "TOGAF",
+          "resources": [
+            "https://www.opengroup.org/togaf",
+            "https://en.wikipedia.org/wiki/The_Open_Group_Architecture_Framework"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Management",
+      "sub-topics": [
+        {
+          "name": "PMI",
+          "resources": [
+            "https://www.pmi.org/"
+          ]
+        },
+        {
+          "name": "ITIL",
+          "resources": [
+            "https://www.axelos.com/certifications/itil-service-management/itil-4-foundation"
+          ]
+        },
+        {
+          "name": "RUP",
+          "resources": [
+            "https://www.ibm.com/training/certification/ibm-certified-solution-designer-ibm-rational-unified-process-v70-38008003"
+          ]
+        },
+        {
+          "name": "Prince2",
+          "resources": [
+            "https://www.axelos.com/certifications/propath/prince2-project-management"
+          ]
+        },
+        {
+          "name": "LeSS",
+          "resources": [
+            "https://less.works/less/framework"
+          ]
+        },
+        {
+          "name": "SaFE",
+          "resources": [
+            "https://scaledagileframework.com/SAFE"
+          ]
+        },
+        {
+          "name": "XP",
+          "resources": [
+            "https://www.agilealliance.org/glossary/xp/",
+            "https://www.nimblework.com/agile/extreme-programming-xp/",
+            "https://scrum-master.org/en/extreme-programming-xp-a-beginners-guide-to-the-agile-method/"
+          ]
+        },
+        {
+          "name": "Kanban",
+          "resources": [
+            "https://businessmap.io/kanban-resources/getting-started/what-is-kanban",
+            "https://kissflow.com/project/agile/kanban-methodology/",
+            "https://www.wrike.com/kanban-guide/what-is-kanban/"
+          ]
+        },
+        {
+          "name": "Scrum",
+          "resources": [
+            "https://www.atlassian.com/agile/scrum.",
+            "https://thedigitalprojectmanager.com/projects/pm-methodology/scrum-methodology-complete-guide/",
+            "https://www.scrum.org/resources/blog/essential-topics-scrum-product-owner",
+            "https://thrivingtechnologist.com/topics/scrum/"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Networks",
+      "sub-topics": [
+        {
+          "name": "OSI",
+          "resources": [
+            "https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/"
+          ]
+        },
+        {
+          "name": "TCP/IP Model",
+          "resources": [
+            "https://www.fortinet.com/resources/cyberglossary/tcp-ip#:~:text=The%20TCP%2FIP%20model%20defines,exchanged%20and%20organized%20over%20networks.",
+            "https://www.techtarget.com/searchnetworking/definition/TCP-IP"
+          ]
+        },
+        {
+          "name": "HTTP, HTTPS",
+          "resources": [
+            "https://www.cloudflare.com/en-gb/learning/ssl/what-is-https/",
+            "https://www.cloudflare.com/en-gb/learning/ddos/glossary/hypertext-transfer-protocol-http/",
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+            "https://cs.fyi/guide/http-in-depth",
+            "https://www.smashingmagazine.com/2021/08/http3-core-concepts-part1/",
+            "https://developers.google.com/web/fundamentals/security/encrypt-in-transit/why-https",
+            "https://developers.google.com/web/fundamentals/security/encrypt-in-transit/enable-https"
+          ]
+        },
+        {
+          "name": "Proxies",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Proxy_server"
+          ]
+        },
+        {
+          "name": "Firewalls",
+          "resources": [
+            "https://www.cloudflare.com/learning/security/what-is-a-firewall/",
+            "https://www.cisco.com/site/us/en/learn/topics/security/what-is-a-firewall.html"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Operations Knowledge",
+      "sub-topics": [
+        {
+          "name": "Infrastructure as Code",
+          "resources": [
+            "https://www.redhat.com/en/topics/automation/what-is-infrastructure-as-code-iac",
+            "https://thenewstack.io/guis-cli-apis-learn-basic-terms-of-infrastructure-as-code/",
+            "https://app.daily.dev/tags/infrastructure?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "Cloud Providers",
+          "resources": [
+            "https://www.techtarget.com/searchitchannel/definition/cloud-service-provider-cloud-provider",
+            "https://www.redhat.com/en/topics/cloud-computing/what-are-cloud-providers",
+            "https://app.daily.dev/tags/cloud?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "Serverless Concepts",
+          "resources": [
+            "https://www.redhat.com/en/topics/cloud-native-apps/what-is-serverless",
+            "https://www.cloudflare.com/learning/serverless/what-is-serverless/",
+            "https://aws.amazon.com/serverless/",
+            "https://app.daily.dev/tags/serverless?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "Linux / Unix",
+          "resources": [
+            "https://roadmap.sh/linux",
+            "https://www.tutorialspoint.com/unix/index.htm",
+            "https://dev.to/rudrakshi99/linux-basics-2onj"
+          ]
+        },
+        {
+          "name": "Service Mesh",
+          "resources": [
+            "https://www.redhat.com/en/topics/microservices/what-is-a-service-mesh",
+            "https://platform9.com/blog/kubernetes-service-mesh-a-comparison-of-istio-linkerd-and-consul/",
+            "https://app.daily.dev/tags/service-mesh?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "CI / CD",
+          "resources": [
+            "https://github.com/resources/articles/devops/ci-cd",
+            "https://www.redhat.com/en/topics/devops/what-is-ci-cd",
+            "https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html",
+            "https://app.daily.dev/tags/cicd?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "Containers",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Cgroups",
+            "https://en.wikipedia.org/wiki/Linux_namespaces",
+            "https://en.wikipedia.org/wiki/Chroot",
+            "https://cloud.google.com/learn/what-are-containers",
+            "https://www.docker.com/resources/what-container/",
+            "https://thenewstack.io/category/containers/",
+            "https://app.daily.dev/tags/containers?ref=roadmapsh"
+          ]
+        },
+        {
+          "name": "Cloud Design Patterns",
+          "resources": [
+            "https://learn.microsoft.com/en-us/azure/architecture/patterns/",
+            "https://app.daily.dev/tags/cloud?ref=roadmapsh"
+          ]
+        }
+      ]
+    },
+    {
+      "Topic": "Enterprise Software",
+      "sub-topics": [
+        {
+          "name": "Enterprise Software",
+          "resources": [
+            "https://en.wikipedia.org/wiki/Enterprise_software"
+          ]
+        }
+      ]
+    }
   ]
 }
