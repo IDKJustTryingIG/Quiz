@@ -84,6 +84,27 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                 Map.of(ex.getField(),ex.getMessage())));
     }
 
+    @ExceptionHandler(InvalidUploadException.class)
+    public ResponseEntity<ApiError> handleInvalidUpload(InvalidUploadException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.badRequest().body(ApiError.of(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                Map.of(ex.getField(),ex.getMessage())));
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiError> handleNotFound(ResourceNotFoundException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiError.of(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()));
+    }
+
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ApiError> handleAuthentication(AuthenticationException ex,HttpServletRequest request)
     {

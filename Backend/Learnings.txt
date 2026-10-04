@@ -1,0 +1,3 @@
+How to write code
+
+Use transactional annotation and try-catch block
