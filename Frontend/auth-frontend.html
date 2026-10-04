@@ -1,0 +1,795 @@
+<title>Four Layers, Four Flows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --ground:#f4f6f9; --surface:#fff; --sunken:#eceff5; --line:#d7dee7; --line-soft:#e5eaf1;
+    --ink:#0f1620; --ink-2:#44515f; --ink-3:#6c7885;
+    --accent:#5b4bc4; --accent-soft:#ecebfa;
+    --live:#1c7a5b; --live-soft:#e2f3ec;
+    --dead:#b3261e; --dead-soft:#fbe9e7;
+    --wait:#a8620d; --wait-soft:#fdf1e0;
+    --measure:68ch;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground:#0c1116; --surface:#141b23; --sunken:#1a222c; --line:#2a3441; --line-soft:#212a35;
+      --ink:#e6edf4; --ink-2:#b2bfcc; --ink-3:#85929f;
+      --accent:#a99cf5; --accent-soft:#1d1a36;
+      --live:#5cc69c; --live-soft:#122a22;
+      --dead:#f2867c; --dead-soft:#2b1614;
+      --wait:#e0a44f; --wait-soft:#2a2013;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground:#0c1116; --surface:#141b23; --sunken:#1a222c; --line:#2a3441; --line-soft:#212a35;
+    --ink:#e6edf4; --ink-2:#b2bfcc; --ink-3:#85929f;
+    --accent:#a99cf5; --accent-soft:#1d1a36;
+    --live:#5cc69c; --live-soft:#122a22;
+    --dead:#f2867c; --dead-soft:#2b1614;
+    --wait:#e0a44f; --wait-soft:#2a2013;
+  }
+
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(0.9rem, 0.62rem + 1vw, 1.06rem); line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1060px; margin-inline: auto; padding-inline: 20px;
+    padding-block: clamp(2.4rem, 1rem + 5vw, 4.5rem) 6rem;
+    display: flex; flex-direction: column; gap: 3rem;
+  }
+  h1,h2,h3 {
+    font-family: "IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;
+    font-weight:700; letter-spacing:-0.018em; margin:0; line-height:1.12; text-wrap:balance;
+  }
+  h1 { font-size: clamp(2rem,1.2rem + 3.2vw,3.3rem); letter-spacing:-0.03em; }
+  h2 { font-size: clamp(1.4rem,1.05rem + 1.4vw,2rem); letter-spacing:-0.022em; }
+  h3 { font-size:1.04rem; font-weight:600; }
+  p { margin:0; max-width:var(--measure); }
+  .lede { font-size:1.1em; color:var(--ink-2); max-width:60ch; }
+  section { display:flex; flex-direction:column; gap:1.05rem; }
+  .eyebrow {
+    font-family:"IBM Plex Mono",monospace; font-size:0.71rem;
+    letter-spacing:0.15em; text-transform:uppercase; color:var(--accent);
+  }
+  code {
+    font-family:"IBM Plex Mono",monospace; font-size:0.85em;
+    background:var(--sunken); border:1px solid var(--line-soft);
+    border-radius:4px; padding:0.06em 0.32em; overflow-wrap:anywhere;
+  }
+  pre {
+    margin:0; background:var(--sunken); border:1px solid var(--line-soft);
+    border-radius:10px; padding:0.9rem 1.05rem; overflow-x:auto;
+    font-size:0.78rem; line-height:1.6;
+  }
+  pre code { background:none; border:0; padding:0; font-size:inherit; }
+  .c { color:var(--ink-3); font-style:italic; }
+  .k { color:var(--accent); }
+  .file {
+    font-family:"IBM Plex Mono",monospace; font-size:0.71rem;
+    color:var(--ink-3); display:block; margin-bottom:0.35rem;
+  }
+  hr { height:1px; background:var(--line); border:0; margin:0; }
+
+  figure {
+    margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:1.2rem; display:flex; flex-direction:column; gap:0.8rem;
+  }
+  figure svg { display:block; width:100%; height:auto; color:var(--ink); }
+  figcaption { font-size:0.85rem; color:var(--ink-3); max-width:70ch; }
+  .scroller { overflow-x:auto; }
+  .scroller > svg { min-width:520px; }
+
+  button {
+    font:inherit; font-size:0.82rem; font-weight:500; color:var(--ink);
+    background:var(--surface); border:1px solid var(--line); border-radius:999px;
+    padding:0.33rem 0.85rem; cursor:pointer;
+    transition:transform 100ms ease-out,border-color 100ms,background-color 100ms,opacity 100ms;
+  }
+  button:hover:not(:disabled){ border-color:var(--ink-3); }
+  button:active:not(:disabled){ transform:scale(0.96); }
+  button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  button[data-primary]{ background:var(--ink); color:var(--ground); border-color:var(--ink); }
+  button[aria-pressed="true"]{ background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+  button:disabled{ opacity:0.45; cursor:default; }
+
+  /* ── player ─────────────────────────────────────── */
+  .lab { background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .lab-head {
+    display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;
+    padding:0.8rem 1rem; border-bottom:1px solid var(--line-soft);
+  }
+  .lab-head .spacer{ flex:1 1 auto; }
+  .counter {
+    font-family:"IBM Plex Mono",monospace; font-size:0.76rem;
+    color:var(--ink-3); font-variant-numeric:tabular-nums;
+  }
+  .lab-body { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); }
+  @media (max-width:880px){ .lab-body{ grid-template-columns:minmax(0,1fr); } }
+
+  .stack { padding:1.1rem; display:flex; flex-direction:column; gap:0.5rem; border-right:1px solid var(--line-soft); }
+  @media (max-width:880px){ .stack{ border-right:0; border-bottom:1px solid var(--line-soft); } }
+
+  .layer {
+    border:1px solid var(--line); border-radius:11px; padding:0.6rem 0.8rem;
+    background:var(--sunken); display:flex; flex-direction:column; gap:0.15rem;
+    transition:border-color 240ms, background-color 240ms, transform 240ms, opacity 240ms;
+    opacity:0.55;
+  }
+  .layer .lname {
+    font-family:"IBM Plex Mono",monospace; font-size:0.68rem;
+    letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-3);
+  }
+  .layer .lfn { font-family:"IBM Plex Mono",monospace; font-size:0.79rem; color:var(--ink); min-height:1.3em; }
+  .layer.on { opacity:1; border-color:var(--accent); background:var(--accent-soft); transform:translateX(4px); }
+  .layer.done { opacity:0.9; border-color:var(--live); background:var(--live-soft); }
+  .layer.failed { opacity:1; border-color:var(--dead); background:var(--dead-soft); }
+  .layer.server { border-style:dashed; }
+
+  .arrowcol { display:flex; justify-content:center; color:var(--ink-3); font-size:0.7rem; line-height:1; }
+
+  .note { padding:1.15rem; background:var(--sunken); display:flex; flex-direction:column; gap:0.65rem; }
+  .note h3 { font-size:0.98rem; }
+  .note p { font-size:0.87rem; color:var(--ink-2); max-width:none; }
+  .who {
+    font-family:"IBM Plex Mono",monospace; font-size:0.7rem; letter-spacing:0.07em;
+    text-transform:uppercase; color:var(--accent);
+  }
+  .snippet {
+    font-family:"IBM Plex Mono",monospace; font-size:0.73rem; line-height:1.55;
+    background:var(--surface); border:1px solid var(--line-soft);
+    border-left:3px solid var(--accent); border-radius:0 7px 7px 0;
+    padding:0.55rem 0.7rem; overflow-x:auto; white-space:pre;
+  }
+
+  /* ── single flight ───────────────────────────────── */
+  .lanes { display:flex; flex-direction:column; gap:0.45rem; }
+  .lane {
+    display:grid; grid-template-columns:5.5rem 1fr; gap:0.6rem; align-items:center;
+    font-family:"IBM Plex Mono",monospace; font-size:0.74rem; color:var(--ink-3);
+  }
+  .bar {
+    position:relative; height:24px; border-radius:6px;
+    background:var(--sunken); border:1px solid var(--line-soft); overflow:hidden;
+  }
+  .bar span {
+    position:absolute; inset:0 auto 0 0; width:0%;
+    display:flex; align-items:center; padding-inline:0.45rem;
+    font-size:0.7rem; color:var(--surface); white-space:nowrap;
+    background:var(--ink-3); transition:width 700ms cubic-bezier(.4,0,.2,1), background-color 240ms;
+  }
+  .bar.wait span { background:var(--wait); }
+  .bar.ok span { background:var(--live); }
+  .bar.bad span { background:var(--dead); }
+
+  .log {
+    display:flex; flex-direction:column; gap:0.28rem;
+    font-family:"IBM Plex Mono",monospace; font-size:0.74rem;
+    background:var(--sunken); border:1px solid var(--line-soft);
+    border-radius:10px; padding:0.7rem 0.85rem; min-height:92px; overflow-x:auto;
+  }
+  .log div { white-space:nowrap; animation:slip 200ms ease-out; }
+  .log .ok{ color:var(--live); } .log .bad{ color:var(--dead); }
+  .log .mv{ color:var(--wait); } .log .dim{ color:var(--ink-3); }
+  @keyframes slip { from{opacity:0;transform:translateX(-5px);} to{opacity:1;transform:none;} }
+
+  .verdict {
+    border-radius:10px; padding:0.65rem 0.85rem; font-size:0.86rem;
+    border-left:3px solid var(--ink-3); background:var(--sunken); color:var(--ink-2);
+    transition:background-color 240ms,border-color 240ms,color 240ms;
+  }
+  .verdict.good{ border-color:var(--live); background:var(--live-soft); color:var(--live); }
+  .verdict.bad{ border-color:var(--dead); background:var(--dead-soft); color:var(--dead); }
+
+  .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:1rem; }
+  .card {
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:1rem 1.1rem; display:flex; flex-direction:column; gap:0.4rem;
+  }
+  .card h3{ font-size:0.96rem; }
+  .card p{ font-size:0.86rem; color:var(--ink-2); max-width:none; }
+
+  table { border-collapse:collapse; width:100%; font-size:0.83rem; }
+  th,td { text-align:left; padding:0.5rem 0.7rem; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  th { font-size:0.71rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-3); font-weight:600; }
+
+  .flag {
+    border-left:3px solid var(--accent); background:var(--accent-soft);
+    border-radius:0 9px 9px 0; padding:0.8rem 1rem; font-size:0.88rem; color:var(--ink-2);
+  }
+  .flag strong{ color:var(--ink); }
+  footer { color:var(--ink-3); font-size:0.8rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,*::before,*::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; }
+    .layer,.bar span,.verdict,button { transition:none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header style="display:flex;flex-direction:column;gap:0.9rem;">
+    <span class="eyebrow">Quiz · frontend auth</span>
+    <h1>Four layers, four flows</h1>
+    <p class="lede">
+      Logging in, signing up, logging out and refreshing all travel the same path through the
+      same four files. Once you can see the path, each flow is just a different stop along it.
+    </p>
+  </header>
+
+  <hr>
+
+  <!-- ══════ THE LAYERS ══════ -->
+  <section>
+    <h2>The path</h2>
+    <p>
+      No screen ever calls the server directly. Every request goes down through the same
+      layers, and each one has exactly one job.
+    </p>
+
+    <figure>
+      <div class="scroller">
+        <svg viewBox="0 0 620 300" role="img"
+             aria-label="Four layers stacked: a screen calls useAuth, which calls a named request function, which calls the shared transport, which calls the server. Only the transport knows about fetch, and only the session layer knows about React state.">
+          <defs>
+            <marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <polygon points="0,1 10,5 0,9" fill="currentColor"></polygon>
+            </marker>
+          </defs>
+          <g font-family="IBM Plex Sans, sans-serif" font-size="12" fill="currentColor">
+            <rect x="80" y="14" width="300" height="44" rx="9" fill="none" stroke="currentColor" stroke-opacity="0.45"></rect>
+            <text x="96" y="33" font-weight="600">Screen</text>
+            <text x="96" y="49" font-size="10.5" font-family="IBM Plex Mono, monospace" fill-opacity="0.7">Login.tsx · Signup.tsx · UserMenu.tsx</text>
+            <text x="396" y="41" font-size="10.5" fill-opacity="0.65">collects input, decides where to go next</text>
+
+            <rect x="80" y="76" width="300" height="44" rx="9" fill="none" stroke="currentColor" stroke-opacity="0.45"></rect>
+            <text x="96" y="95" font-weight="600">Session</text>
+            <text x="96" y="111" font-size="10.5" font-family="IBM Plex Mono, monospace" fill-opacity="0.7">auth.tsx — useAuth()</text>
+            <text x="396" y="103" font-size="10.5" fill-opacity="0.65">holds who is signed in</text>
+
+            <rect x="80" y="138" width="300" height="44" rx="9" fill="none" stroke="currentColor" stroke-opacity="0.45"></rect>
+            <text x="96" y="157" font-weight="600">Requests</text>
+            <text x="96" y="173" font-size="10.5" font-family="IBM Plex Mono, monospace" fill-opacity="0.7">authApi.ts</text>
+            <text x="396" y="165" font-size="10.5" fill-opacity="0.65">one function per endpoint</text>
+
+            <rect x="80" y="200" width="300" height="44" rx="9" fill="none" stroke="currentColor" stroke-opacity="0.9" stroke-width="1.6"></rect>
+            <text x="96" y="219" font-weight="600">Transport</text>
+            <text x="96" y="235" font-size="10.5" font-family="IBM Plex Mono, monospace" fill-opacity="0.7">api.ts</text>
+            <text x="396" y="227" font-size="10.5" fill-opacity="0.65">the only file that calls fetch</text>
+
+            <rect x="80" y="262" width="300" height="30" rx="9" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-dasharray="4 4"></rect>
+            <text x="96" y="282" font-size="11" fill-opacity="0.7">Spring API · localhost:8080</text>
+          </g>
+          <g stroke="currentColor" stroke-opacity="0.5" marker-end="url(#d)" fill="none">
+            <line x1="230" y1="58" x2="230" y2="72"></line>
+            <line x1="230" y1="120" x2="230" y2="134"></line>
+            <line x1="230" y1="182" x2="230" y2="196"></line>
+            <line x1="230" y1="244" x2="230" y2="258"></line>
+          </g>
+        </svg>
+      </div>
+      <figcaption>
+        The two boundaries that matter: only <code>api.ts</code> knows the app talks over HTTP,
+        and only <code>auth.tsx</code> knows about React state. A screen knows neither.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ══════ PLAYER ══════ -->
+  <section>
+    <h2>Watch a flow travel down</h2>
+    <p>
+      Pick a flow and step through it. The layer that is working lights up, and the panel shows
+      the actual line of code running at that moment.
+    </p>
+
+    <div class="lab">
+      <div class="lab-head">
+        <button id="f-login" type="button" aria-pressed="true">Log in</button>
+        <button id="f-signup" type="button" aria-pressed="false">Sign up</button>
+        <button id="f-logout" type="button" aria-pressed="false">Log out</button>
+        <button id="f-refresh" type="button" aria-pressed="false">Refresh</button>
+        <span class="spacer"></span>
+        <button id="p-prev" type="button">‹</button>
+        <button id="p-play" type="button" data-primary>Play</button>
+        <button id="p-next" type="button">›</button>
+        <span class="counter" id="p-count">1 / 1</span>
+      </div>
+
+      <div class="lab-body">
+        <div class="stack" id="p-stack">
+          <div class="layer" data-layer="0"><span class="lname">screen</span><span class="lfn" id="L0">—</span></div>
+          <div class="arrowcol">↓</div>
+          <div class="layer" data-layer="1"><span class="lname">session · auth.tsx</span><span class="lfn" id="L1">—</span></div>
+          <div class="arrowcol">↓</div>
+          <div class="layer" data-layer="2"><span class="lname">requests · authApi.ts</span><span class="lfn" id="L2">—</span></div>
+          <div class="arrowcol">↓</div>
+          <div class="layer" data-layer="3"><span class="lname">transport · api.ts</span><span class="lfn" id="L3">—</span></div>
+          <div class="arrowcol">↓</div>
+          <div class="layer server" data-layer="4"><span class="lname">spring api</span><span class="lfn" id="L4">—</span></div>
+        </div>
+
+        <div class="note">
+          <span class="who" id="p-who">step</span>
+          <h3 id="p-title">—</h3>
+          <p id="p-text">—</p>
+          <div class="snippet" id="p-code">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ══════ CODE ══════ -->
+  <section>
+    <h2>The code behind each layer</h2>
+
+    <h3 style="margin-top:0.5rem;">Transport — the only place <code>fetch</code> appears</h3>
+    <p>
+      Every call sets <code>credentials: "include"</code>. Without it the browser leaves the
+      refresh cookie behind and the server cannot tell who is calling.
+    </p>
+    <div>
+      <span class="file">src/lib/api.ts</span>
+<pre><code><span class="k">const</span> send = (path, options = {}) =&gt; {
+  <span class="k">const</span> headers = {};
+  <span class="k">if</span> (options.body !== undefined) headers[<span class="k">"Content-Type"</span>] = <span class="k">"application/json"</span>;
+  <span class="k">if</span> (accessToken) headers.Authorization = <span class="k">`Bearer ${accessToken}`</span>;
+
+  <span class="k">return</span> fetch(apiUrl(path), {
+    method: options.method ?? <span class="k">"GET"</span>,
+    headers,
+    credentials: <span class="k">"include"</span>,   <span class="c">// sends the refresh cookie</span>
+    body: options.body === undefined ? undefined : JSON.stringify(options.body),
+  });
+};</code></pre>
+    </div>
+
+    <h3 style="margin-top:1.4rem;">Requests — signup and login are the same shape</h3>
+    <p>
+      Since your backend changed, creating an account returns exactly what logging in returns:
+      an access token in the body, a refresh cookie in the headers. So both go through one
+      helper rather than two near-identical copies.
+    </p>
+    <div>
+      <span class="file">src/lib/authApi.ts</span>
+<pre><code><span class="k">const</span> startSession = <span class="k">async</span> (path, body) =&gt; {
+  <span class="k">const</span> tokens = <span class="k">await</span> apiRequest(path, { method: <span class="k">"POST"</span>, body, noRetry: <span class="k">true</span> });
+  readTokens(tokens);          <span class="c">// keep the access token in memory</span>
+  <span class="k">return</span> tokens;
+};
+
+<span class="k">export const</span> signUpRequest = (input) =&gt; startSession(<span class="k">"/api/auth/signup"</span>, input);
+<span class="k">export const</span> loginRequest = (email, password) =&gt;
+  startSession(<span class="k">"/api/auth/login"</span>, { email, password });</code></pre>
+    </div>
+    <p>
+      <code>noRetry</code> is the interesting flag. Everywhere else, a rejection means the token
+      went stale and is worth retrying after a refresh. Here it means the email or password was
+      wrong, and retrying would only be told the same thing again.
+    </p>
+
+    <h3 style="margin-top:1.4rem;">Session — the only place React state lives</h3>
+    <div>
+      <span class="file">src/lib/auth.tsx</span>
+<pre><code><span class="c">/** Fetch the profile and mark the app signed in. */</span>
+<span class="k">const</span> adopt = useCallback(<span class="k">async</span> () =&gt; {
+  <span class="k">const</span> profile = <span class="k">await</span> meRequest();
+  setUser(profile);
+  setStatus(<span class="k">"authenticated"</span>);
+}, []);
+
+<span class="k">const</span> login = <span class="k">async</span> (email, password) =&gt; { <span class="k">await</span> loginRequest(email, password); <span class="k">await</span> adopt(); };
+<span class="k">const</span> signUp = <span class="k">async</span> (input)          =&gt; { <span class="k">await</span> signUpRequest(input);        <span class="k">await</span> adopt(); };</code></pre>
+    </div>
+    <p>
+      Two calls, not one, because the token says almost nothing about you — a user id, a jti,
+      an email claim. The username and picture the interface renders come from
+      <code>/api/auth/me</code>.
+    </p>
+  </section>
+
+  <hr>
+
+  <!-- ══════ STATUS MACHINE ══════ -->
+  <section>
+    <h2>Three states, and why the first one matters</h2>
+    <p>
+      The whole app reads one value: <code>status</code>. It starts as <code>loading</code>, and
+      that is not a detail — it is the difference between working and infuriating.
+    </p>
+
+    <figure>
+      <div class="scroller">
+        <svg viewBox="0 0 620 190" role="img"
+             aria-label="Status starts at loading while the app asks the server who you are, then moves to authenticated or anonymous. Logging in moves anonymous to authenticated; logging out moves it back.">
+          <defs>
+            <marker id="d2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <polygon points="0,1 10,5 0,9" fill="currentColor"></polygon>
+            </marker>
+          </defs>
+          <g font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor" text-anchor="middle">
+            <rect x="20" y="70" width="130" height="42" rx="21" fill="none" stroke="currentColor" stroke-opacity="0.6"></rect>
+            <text x="85" y="96">loading</text>
+            <rect x="420" y="18" width="170" height="42" rx="21" fill="none" stroke="currentColor" stroke-opacity="0.6"></rect>
+            <text x="505" y="44">authenticated</text>
+            <rect x="420" y="124" width="170" height="42" rx="21" fill="none" stroke="currentColor" stroke-opacity="0.6"></rect>
+            <text x="505" y="150">anonymous</text>
+          </g>
+          <g stroke="currentColor" stroke-opacity="0.55" fill="none" marker-end="url(#d2)">
+            <path d="M150 84 C 280 84, 300 39, 416 39"></path>
+            <path d="M150 98 C 280 98, 300 145, 416 145"></path>
+            <path d="M505 60 C 560 78, 560 106, 505 124" stroke-dasharray="4 3"></path>
+            <path d="M505 124 C 450 106, 450 78, 505 60" stroke-dasharray="4 3"></path>
+          </g>
+          <g font-family="IBM Plex Sans, sans-serif" font-size="10.5" fill="currentColor" fill-opacity="0.75">
+            <text x="238" y="54">refresh worked</text>
+            <text x="238" y="134">refresh failed</text>
+            <text x="574" y="96" text-anchor="middle">log out</text>
+            <text x="436" y="96" text-anchor="middle">log in</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>
+        <code>RequireAuth</code> shows a waiting state for <code>loading</code>. Skip that and it
+        treats "I do not know yet" as "not signed in", and throws you to the login page on every
+        single reload.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ══════ SINGLE FLIGHT ══════ -->
+  <section>
+    <h2>Refresh, and why only one at a time</h2>
+    <p>
+      The access token lasts fifteen minutes. When it runs out, the next call comes back 401 and
+      the transport quietly fixes it: get a new token, run the request again. The screen never
+      finds out.
+    </p>
+    <div>
+      <span class="file">src/lib/api.ts</span>
+<pre><code><span class="k">let</span> response = <span class="k">await</span> send(path, options);
+
+<span class="k">if</span> (response.status === <span class="k">401</span> &amp;&amp; !options.noRetry) {
+  <span class="k">const</span> refreshed = <span class="k">await</span> refreshSession();
+  <span class="k">if</span> (refreshed) response = <span class="k">await</span> send(path, options);
+}</code></pre>
+    </div>
+
+    <p>
+      Now suppose three calls expire together. Run it both ways.
+    </p>
+
+    <div class="lab">
+      <div class="lab-head">
+        <button id="s-safe" type="button" aria-pressed="true">Shared refresh (what the code does)</button>
+        <button id="s-naive" type="button" aria-pressed="false">One refresh each</button>
+        <span class="spacer"></span>
+        <button id="s-run" type="button" data-primary>Run</button>
+        <button id="s-reset" type="button">Reset</button>
+      </div>
+      <div class="lab-body" style="grid-template-columns:minmax(0,1fr);">
+        <div class="note" style="background:var(--surface);gap:0.9rem;">
+          <div class="lanes">
+            <div class="lane"><span>GET /me</span><div class="bar" id="b0"><span></span></div></div>
+            <div class="lane"><span>GET /tracks</span><div class="bar" id="b1"><span></span></div></div>
+            <div class="lane"><span>GET /battle</span><div class="bar" id="b2"><span></span></div></div>
+            <div class="lane"><span>refresh</span><div class="bar" id="br"><span></span></div></div>
+          </div>
+          <div class="log" id="s-log"></div>
+          <div class="verdict" id="s-verdict">Three calls, all holding a token that just expired.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flag">
+      <strong>The server swaps the refresh token for a new one every time it is used.</strong>
+      So the second and third callers turn up holding a token that has already been spent, which
+      looks exactly like a stolen one being replayed — and the server signs you out everywhere.
+      Sharing one refresh is what prevents that.
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ══════ FORMS ══════ -->
+  <section>
+    <h2>What the two forms share</h2>
+    <p>
+      Login and signup need the same three things: a busy flag, a message when it fails, and
+      per-field messages when the server says which field was wrong. That lives in one hook.
+    </p>
+    <div>
+      <span class="file">src/lib/authForm.ts</span>
+<pre><code><span class="k">const</span> { pending, error, fieldErrors, run } = useAuthSubmit();
+
+<span class="c">// run() returns true if it worked, so the page decides where to go next</span>
+<span class="k">const</span> ok = <span class="k">await</span> run(() =&gt; login(email, password), (cause) =&gt;
+  cause.status === <span class="k">401</span>
+    ? <span class="k">"That email and password do not match an account."</span>
+    : cause.message);
+
+<span class="k">if</span> (ok) navigate(from, { replace: <span class="k">true</span> });</code></pre>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Why the wording is rewritten</h3>
+        <p>
+          The server answers a bad login vaguely on purpose, so nobody can use the login form to
+          find out which email addresses have accounts. That is right for the API and useless on
+          screen, so the page supplies a human sentence.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Why field errors hide the banner</h3>
+        <p>
+          When the server names the fields that were wrong, those messages already sit under the
+          inputs. A banner repeating them adds nothing, so it only appears when there are no
+          field messages to show.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ REFERENCE ══════ -->
+  <section>
+    <h2>Every flow, at a glance</h2>
+    <table>
+      <thead>
+        <tr><th>Flow</th><th>Requests</th><th>Ends at</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Log in</td><td><code>POST /login</code> → <code>GET /me</code></td><td>the page you were blocked from, else <code>/tracks</code></td></tr>
+        <tr><td>Sign up</td><td><code>POST /signup</code> → <code>GET /me</code></td><td><code>/tracks</code></td></tr>
+        <tr><td>Google</td><td><code>POST /refresh</code> → <code>GET /me</code></td><td><code>/tracks</code></td></tr>
+        <tr><td>App start / reload</td><td><code>POST /refresh</code> → <code>GET /me</code></td><td>wherever you already were</td></tr>
+        <tr><td>Token expired</td><td><code>POST /refresh</code> → the original call again</td><td>nothing visible happens</td></tr>
+        <tr><td>Log out</td><td><code>POST /logout</code></td><td><code>/</code></td></tr>
+      </tbody>
+    </table>
+    <p>
+      The bottom three rows are the point of the whole arrangement: three different situations,
+      one mechanism, and in two of them the person using the app notices nothing at all.
+    </p>
+  </section>
+
+  <footer>
+    Taken from <code>src/lib/api.ts</code>, <code>src/lib/authApi.ts</code>,
+    <code>src/lib/auth.tsx</code>, <code>src/lib/authForm.ts</code> and the auth screens.
+    The simulations model that code; they do not run it.
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const wait = (ms) => new Promise((r) => setTimeout(r, reduced ? Math.min(ms, 50) : ms));
+  const line = (log, cls, text) => {
+    const d = document.createElement("div"); d.className = cls; d.textContent = text;
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+  };
+
+  /* ─── FLOW PLAYER ─────────────────────────────── */
+  const FLOWS = {
+    login: [
+      { layer:0, fn:"handleSubmit(event)", who:"Login.tsx", title:"Read the fields",
+        text:"Taken straight from the form before anything async happens, because after an await React may have already recycled the event.",
+        code:'const data = new FormData(event.currentTarget);\nconst email = String(data.get("email"));' },
+      { layer:1, fn:"login(email, password)", who:"auth.tsx", title:"Hand it to the session layer",
+        text:"The screen does not know an HTTP request is about to happen. It asks for a login and waits.",
+        code:'const { login } = useAuth();' },
+      { layer:2, fn:"loginRequest(...) → startSession", who:"authApi.ts", title:"Name the endpoint",
+        text:"Signup and login share this helper, because the backend now answers both the same way.",
+        code:'startSession("/api/auth/login", { email, password })' },
+      { layer:3, fn:"apiRequest(path, { noRetry })", who:"api.ts", title:"Actually send it",
+        text:"noRetry is set here. A rejection means wrong details, not a stale token, so refreshing and retrying would be pointless.",
+        code:'fetch(apiUrl(path), { method: "POST", credentials: "include", … })' },
+      { layer:4, fn:"200 { access_token, expires_in }", who:"spring", title:"Token in the body, cookie in the headers",
+        text:"The refresh token never appears in the JSON. It arrives as a Set-Cookie the page cannot read.",
+        code:'200 { access_token: "eyJ…", token_type: "Bearer", expires_in: 900 }\nSet-Cookie: refresh_token=…; HttpOnly; Path=/api/auth' },
+      { layer:3, fn:"readTokens(tokens)", who:"api.ts", title:"Keep the token in memory",
+        text:"Stored in a plain variable. Not localStorage — anything there can be read by any script on the page.",
+        code:'let accessToken = null;   // ← set here' },
+      { layer:1, fn:"adopt() → meRequest()", who:"auth.tsx", title:"Find out who this is",
+        text:"The token carries a user id and little else, so the username and picture come from a second call.",
+        code:'const profile = await meRequest();\nsetUser(profile);\nsetStatus("authenticated");' },
+      { layer:0, fn:'navigate("/tracks")', who:"Login.tsx", title:"Go somewhere useful",
+        text:"Back to whatever page the guard turned them away from, or the tracks list if they came straight here.",
+        code:'if (ok) navigate(from, { replace: true });' },
+    ],
+    signup: [
+      { layer:0, fn:"handleSubmit(event)", who:"Signup.tsx", title:"Three fields this time",
+        text:"Username has its own rules the server enforces: 3 to 30 characters, and it must be free.",
+        code:'{ email: …, username: …, password: … }' },
+      { layer:1, fn:"signUp(input)", who:"auth.tsx", title:"One call, not two",
+        text:"This used to create the account and then log in separately. Your backend change made the second call unnecessary.",
+        code:'await signUpRequest(input);\nawait adopt();' },
+      { layer:2, fn:"signUpRequest → startSession", who:"authApi.ts", title:"The same helper as login",
+        text:"Nothing here differs from logging in except the path and the body, which is exactly why they share code.",
+        code:'startSession("/api/auth/signup", input)' },
+      { layer:4, fn:"201 { access_token, expires_in }", who:"spring", title:"Created, and signed in",
+        text:"201 rather than 200, and the same token pair login returns. The account exists and the session is already live.",
+        code:'201 { access_token: "eyJ…", expires_in: 900 }\nSet-Cookie: refresh_token=…; HttpOnly' },
+      { layer:1, fn:"adopt() → meRequest()", who:"auth.tsx", title:"Same ending as login",
+        text:"From here the two flows are identical. Fetch the profile, mark the app signed in.",
+        code:'setStatus("authenticated");' },
+      { layer:0, fn:'navigate("/tracks")', who:"Signup.tsx", title:"Straight to the tracks",
+        text:"No confirmation screen and no second login form, because there is nothing left to do.",
+        code:'navigate(SIGNED_IN_HOME, { replace: true });' },
+    ],
+    logout: [
+      { layer:0, fn:'navigate("/", { replace: true })', who:"UserMenu.tsx", title:"Leave the page first",
+        text:"Deliberately before ending the session. If the session ends while you are still on a protected page, the guard redirects you to the login screen instead.",
+        code:'navigate("/", { replace: true });\nsetTimeout(() => void logout(), 0);' },
+      { layer:1, fn:"logout()", who:"auth.tsx", title:"Ask the session layer to end it",
+        text:"Deferred by a tick so the route change lands first.",
+        code:'const logout = async () => { await logoutRequest(); … }' },
+      { layer:2, fn:"logoutRequest()", who:"authApi.ts", title:"Tell the server",
+        text:"Wrapped in try/finally. Whatever the server says, the app forgets the token locally — they asked to be logged out.",
+        code:'try { await apiRequest("/api/auth/logout", …) }\nfinally { setAccessToken(null); }' },
+      { layer:4, fn:"204 No Content", who:"spring", title:"Always 204",
+        text:"Even for a token it does not recognise. Logging out never reveals whether a session existed.",
+        code:'204\nSet-Cookie: refresh_token=; Max-Age=0' },
+      { layer:1, fn:'setStatus("anonymous")', who:"auth.tsx", title:"Forget everything",
+        text:"Token gone from memory, cookie cleared by the server, user set to null. The guard now turns them away from protected pages.",
+        code:'setUser(null);\nsetStatus("anonymous");' },
+    ],
+    refresh: [
+      { layer:0, fn:"any page, any call", who:"anywhere", title:"Nobody asked for this",
+        text:"Refresh is never triggered by a screen. It happens underneath, either when the app starts or when a call comes back 401.",
+        code:'// no screen code involved' },
+      { layer:3, fn:"send(path) → 401", who:"api.ts", title:"The token ran out",
+        text:"Fifteen minutes after it was issued, the server stops accepting it.",
+        code:'let response = await send(path, options);\n// response.status === 401' },
+      { layer:3, fn:"refreshSession()", who:"api.ts", title:"One refresh, shared",
+        text:"If several calls land here at once they all wait on the same promise. Asking separately would get the user signed out everywhere.",
+        code:'refreshInFlight ??= performRefresh()\n  .finally(() => { refreshInFlight = null; });' },
+      { layer:4, fn:"POST /api/auth/refresh", who:"spring", title:"The cookie does the talking",
+        text:"No body and no bearer token. The browser attaches the refresh cookie because every request is sent with credentials included.",
+        code:'200 { access_token: "eyJ…", expires_in: 900 }\nSet-Cookie: refresh_token=…   ← a different value than before' },
+      { layer:3, fn:"send(path) again", who:"api.ts", title:"Run the original call again",
+        text:"Same path, same body, new token. The layer that made the call never learns any of this happened.",
+        code:'if (refreshed) response = await send(path, options);' },
+      { layer:0, fn:"the result arrives", who:"anywhere", title:"Nothing visible happened",
+        text:"No spinner, no flicker, no login screen. This is the same mechanism that restores your session after a reload.",
+        code:'// the caller just sees a successful response' },
+    ],
+  };
+
+  let flow = "login", step = 0, timer = null;
+  const layers = [...document.querySelectorAll(".layer")];
+  const lfns = [0,1,2,3,4].map((i) => $("L" + i));
+
+  const paint = () => {
+    const steps = FLOWS[flow];
+    const s = steps[step];
+    layers.forEach((el, i) => {
+      el.classList.toggle("on", i === s.layer);
+      el.classList.toggle("done", i !== s.layer && steps.slice(0, step).some((x) => x.layer === i));
+      el.classList.remove("failed");
+    });
+    lfns.forEach((el, i) => {
+      const last = [...steps.slice(0, step + 1)].reverse().find((x) => x.layer === i);
+      el.textContent = last ? last.fn : "—";
+    });
+    $("p-who").textContent = s.who;
+    $("p-title").textContent = s.title;
+    $("p-text").textContent = s.text;
+    $("p-code").textContent = s.code;
+    $("p-count").textContent = (step + 1) + " / " + steps.length;
+  };
+
+  const stopPlay = () => { if (timer) clearInterval(timer); timer = null; $("p-play").textContent = "Play"; };
+  const setStep = (i) => { const n = FLOWS[flow].length; step = (i + n) % n; paint(); };
+
+  const setFlow = (f) => {
+    stopPlay(); flow = f; step = 0;
+    ["login","signup","logout","refresh"].forEach((k) =>
+      $("f-" + k).setAttribute("aria-pressed", String(k === f)));
+    paint();
+  };
+  ["login","signup","logout","refresh"].forEach((k) =>
+    $("f-" + k).addEventListener("click", () => setFlow(k)));
+
+  $("p-next").addEventListener("click", () => { stopPlay(); setStep(step + 1); });
+  $("p-prev").addEventListener("click", () => { stopPlay(); setStep(step - 1); });
+  $("p-play").addEventListener("click", () => {
+    if (timer) { stopPlay(); return; }
+    $("p-play").textContent = "Pause";
+    timer = setInterval(() => {
+      if (step === FLOWS[flow].length - 1) { stopPlay(); return; }
+      setStep(step + 1);
+    }, 2500);
+  });
+  paint();
+
+  /* ─── SINGLE FLIGHT ───────────────────────────── */
+  const bars = ["b0","b1","b2"].map($);
+  const barR = $("br");
+  const sLog = $("s-log"), sVerdict = $("s-verdict");
+  let shared = true;
+  const sButtons = ["s-run","s-reset","s-safe","s-naive"].map($);
+
+  const setBar = (bar, pct, cls, label) => {
+    bar.className = "bar" + (cls ? " " + cls : "");
+    const fill = bar.querySelector("span");
+    fill.style.width = pct + "%";
+    fill.textContent = label || "";
+  };
+
+  const sReset = () => {
+    bars.forEach((b) => setBar(b, 0, "", ""));
+    setBar(barR, 0, "", "");
+    sLog.innerHTML = "";
+    line(sLog, "dim", "three calls, one expired access token");
+    sVerdict.className = "verdict";
+    sVerdict.textContent = "Three calls, all holding a token that just expired.";
+  };
+
+  const setMode = (isShared) => {
+    shared = isShared;
+    $("s-safe").setAttribute("aria-pressed", String(isShared));
+    $("s-naive").setAttribute("aria-pressed", String(!isShared));
+    sReset();
+  };
+  $("s-safe").addEventListener("click", () => setMode(true));
+  $("s-naive").addEventListener("click", () => setMode(false));
+
+  const sRun = async () => {
+    sButtons.forEach((b) => (b.disabled = true));
+    sLog.innerHTML = "";
+
+    bars.forEach((b, i) => setBar(b, 40, "bad", "401"));
+    line(sLog, "bad", "all three ← 401  token expired");
+    await wait(700);
+
+    if (shared) {
+      setBar(barR, 100, "wait", "POST /refresh  ×1");
+      line(sLog, "mv", "first caller starts the refresh");
+      line(sLog, "dim", "other two wait on the same promise");
+      await wait(900);
+      setBar(barR, 100, "ok", "200 · rt-1 → rt-2");
+      line(sLog, "ok", "200 · new access token shared by all three");
+      await wait(500);
+      for (const b of bars) { setBar(b, 100, "ok", "200 retried"); await wait(220); }
+      line(sLog, "ok", "all three retried and succeeded");
+      sVerdict.className = "verdict good";
+      sVerdict.textContent = "One refresh, three successful retries. The refresh token was used exactly once, which is what the server expects.";
+    } else {
+      setBar(barR, 100, "wait", "POST /refresh  ×3  (same token)");
+      line(sLog, "mv", "all three send POST /refresh with rt-1");
+      await wait(900);
+      line(sLog, "ok", "call 1 ← 200 · rt-1 spent, rt-2 issued");
+      setBar(bars[0], 100, "ok", "200 retried");
+      await wait(600);
+      line(sLog, "bad", "call 2 ← rt-1 already spent → looks like a replay");
+      line(sLog, "bad", "call 3 ← same");
+      line(sLog, "bad", "revokeAllForUser()  ·  every session ended");
+      setBar(barR, 100, "bad", "reuse detected");
+      setBar(bars[1], 60, "bad", "401");
+      setBar(bars[2], 60, "bad", "401");
+      await wait(400);
+      setBar(bars[0], 60, "bad", "signed out");
+      sVerdict.className = "verdict bad";
+      sVerdict.textContent = "Signed out everywhere. Two of the three presented a token that had already been used, and the server cannot tell that apart from theft.";
+    }
+
+    sButtons.forEach((b) => (b.disabled = false));
+  };
+
+  $("s-run").addEventListener("click", sRun);
+  $("s-reset").addEventListener("click", sReset);
+  sReset();
+})();
+</script>
