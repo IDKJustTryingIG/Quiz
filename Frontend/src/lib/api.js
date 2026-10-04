@@ -36,7 +36,11 @@ export const setAccessToken = (token) => {
  */
 const dispatch = (path, options = {}) => {
   const headers = {};
-  if (options.body !== undefined) headers["Content-Type"] = "application/json";
+  // FormData sets its own multipart Content-Type, boundary included, so leave
+  // it alone and send it as is.
+  const isForm = options.body instanceof FormData;
+  if (options.body !== undefined && !isForm)
+    headers["Content-Type"] = "application/json";
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
   return fetch(apiUrl(path), {
     method: options.method ?? "GET",
@@ -44,7 +48,10 @@ const dispatch = (path, options = {}) => {
     // Without this the browser leaves the refresh cookie behind, and the
     // server has no way to tell who is calling.
     credentials: "include",
-    body: options.body === undefined ? undefined : JSON.stringify(options.body),
+    body:
+      options.body === undefined || isForm
+        ? options.body
+        : JSON.stringify(options.body),
   });
 };
 
@@ -122,11 +129,24 @@ export const refreshSession = () => {
   });
   return refreshInFlight;
 };
-export const apiRequest = async (path, options = {}) => {
+/** Sends the request, refreshing the session and retrying once on a 401. */
+const sendWithRefresh = async (path, options = {}) => {
   let response = await send(path, options);
   if (response.status === 401 && !options.noRetry) {
     const refreshed = await refreshSession();
     if (refreshed) response = await send(path, options);
   }
-  return parse(response);
+  return response;
+};
+export const apiRequest = async (path, options = {}) =>
+  parse(await sendWithRefresh(path, options));
+/**
+ * Fetches a file the API serves, such as a track resource. A plain link cannot
+ * do this: the browser would leave the access token behind.
+ */
+export const apiBlob = async (path) => {
+  const response = await sendWithRefresh(path);
+  // On failure parse() reads the error body and throws.
+  if (!response.ok) await parse(response);
+  return response.blob();
 };

@@ -10,6 +10,7 @@ import OAuthSuccess from "@/pages/OAuthSuccess";
 import Profile from "@/pages/Profile";
 import Quiz from "@/pages/Quiz";
 import Signup from "@/pages/Signup";
+import TrackDetail from "@/pages/TrackDetail";
 import Tracks from "@/pages/Tracks";
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route element={<RequireAuth />}>
             <Route path="profile" element={<Profile />} />
             <Route path="account" element={<Account />} />
+            <Route path="tracks/:slug" element={<TrackDetail />} />
           </Route>
         </Route>
         <Route path="login" element={<Login />} />
