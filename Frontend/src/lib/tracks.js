@@ -35,6 +35,39 @@ export const createTrack = ({ name, description, visibility, topics }) => {
   return apiRequest("/api/tracks/full", { method: "POST", body: form });
 };
 
+/**
+ * Saves the owner's edit of a track in one multipart request: all of it or
+ * none of it. The name cannot change, so it is not sent.
+ *
+ * Each day is { topicId (null for a new day), name, keptFiles, files }.
+ * Existing files not in keptFiles are removed. Day i's new files go in the
+ * "files-{i}" parts.
+ */
+export const updateTrack = (trackId, { description, visibility, days }) => {
+  const form = new FormData();
+  const track = {
+    description,
+    visibility,
+    days: days.map((day) => ({
+      topicId: day.topicId ?? null,
+      name: day.name,
+      keepFileIds: day.keptFiles.map((file) => file.fileId),
+    })),
+  };
+  form.append(
+    "track",
+    new Blob([JSON.stringify(track)], { type: "application/json" }),
+  );
+  days.forEach((day, i) => {
+    day.files.forEach((file) => form.append(`files-${i}`, file));
+  });
+  return apiRequest(`/api/tracks/${trackId}`, { method: "PUT", body: form });
+};
+
+/** Deletes a track the user owns, with its days and every file only it uses. */
+export const deleteTrack = (trackId) =>
+  apiRequest(`/api/tracks/${trackId}`, { method: "DELETE" });
+
 /** Track names are unique across all users, compared exactly. */
 export const checkTrackName = (name) =>
   apiRequest(
@@ -51,6 +84,38 @@ export const fetchPublicTracks = (query, page, size) => {
 /** A track with its days, topics and files, or a 404 if the user cannot see it. */
 export const fetchTrackDetail = (slug) =>
   apiRequest(`/api/tracks/by-slug/${encodeURIComponent(slug)}`);
+
+/**
+ * The quiz for one day, without its answers:
+ * { trackId, topicId, quizId, questions: [{ questionId, question, options, sourceFile }] }.
+ *
+ * Opening a quiz never asks the model. If the day has no quiz yet, this fails
+ * with a 404 and the message "The quiz for this day is not ready yet."
+ */
+export const fetchQuiz = (trackId, topicId) =>
+  apiRequest(`/api/tracks/${trackId}/topics/${topicId}/quiz`);
+
+/**
+ * Makes the day's quiz now, if it has none, and returns it like fetchQuiz.
+ * Owner only. The model writes it, which takes up to a minute and costs money.
+ */
+export const prepareQuiz = (trackId, topicId) =>
+  apiRequest(`/api/tracks/${trackId}/topics/${topicId}/quiz`, {
+    method: "POST",
+  });
+
+/**
+ * Sends the answers and gets the score and the correct answers back:
+ * { quizId, score, total, results: [{ questionId, chosenIndex, correctIndex, correct, explanation }] }.
+ *
+ * answers is [{ questionId, chosenIndex }], with chosenIndex null when the
+ * time ran out.
+ */
+export const checkAnswers = (trackId, topicId, quizId, answers) =>
+  apiRequest(`/api/tracks/${trackId}/topics/${topicId}/quiz/answers`, {
+    method: "POST",
+    body: { quizId, answers },
+  });
 
 /** Types a browser tab can show itself; anything else is downloaded. */
 const VIEWABLE = /^(application\/pdf|image\/(png|jpeg|gif|webp)|text\/plain)$/;

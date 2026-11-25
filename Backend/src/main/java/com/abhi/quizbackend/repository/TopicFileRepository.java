@@ -23,4 +23,7 @@ public interface TopicFileRepository
             Long topicId,
             Long fileId
     );
+
+    /** Whether any topic still uses this file. */
+    boolean existsByFileFileId(Long fileId);
 }

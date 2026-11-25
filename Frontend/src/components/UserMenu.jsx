@@ -1,4 +1,11 @@
-import { CircleUser, LogIn, LogOut, User, UserPlus } from "lucide-react";
+import {
+  CircleUser,
+  ListTodo,
+  LogIn,
+  LogOut,
+  User,
+  UserPlus,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -57,6 +64,12 @@ const UserMenu = () => {
                 <CircleUser />
                 My account
               </DropdownMenuItem>
+              {user.role === "ADMIN" && (
+                <DropdownMenuItem render={<Link to="/admin/quiz-jobs" />}>
+                  <ListTodo />
+                  Quiz queue
+                </DropdownMenuItem>
+              )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem

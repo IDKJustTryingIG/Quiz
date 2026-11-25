@@ -29,4 +29,10 @@ public interface TrackTopicRepository
             Long trackId,
             Long topicId
     );
+
+    /** Whether any track still uses this topic. */
+    boolean existsByTopicTopicId(Long topicId);
+
+    /** How many tracks use this topic. More than 1 means the topic is shared. */
+    long countByTopicTopicId(Long topicId);
 }

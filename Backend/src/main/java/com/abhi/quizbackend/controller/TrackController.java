@@ -2,12 +2,13 @@ package com.abhi.quizbackend.controller;
 
 import com.abhi.quizbackend.models.CreateFullTrackRequest;
 import com.abhi.quizbackend.models.CreateTrackRequest;
+import com.abhi.quizbackend.models.EditTrackRequest;
 import com.abhi.quizbackend.models.TrackDetailResponse;
 import com.abhi.quizbackend.models.TrackPageResponse;
 import com.abhi.quizbackend.models.TrackResponse;
-import com.abhi.quizbackend.models.UpdateTrackRequest;
 import com.abhi.quizbackend.security.service.CustomUserDetails;
 import com.abhi.quizbackend.service.TrackCreationService;
+import com.abhi.quizbackend.service.TrackEditService;
 import com.abhi.quizbackend.service.TrackService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -44,6 +45,7 @@ public class TrackController {
 
     private final TrackService trackService;
     private final TrackCreationService trackCreationService;
+    private final TrackEditService trackEditService;
 
     @PostMapping
     public ResponseEntity<TrackResponse> create(
@@ -141,14 +143,26 @@ public class TrackController {
         );
     }
 
-    @PutMapping("/{trackId}")
+    /**
+     * Saves the owner's edit of a track in one request. The name cannot change.
+     *
+     * Multipart parts: "track" holds an {@link EditTrackRequest} as JSON, and
+     * "files-{i}" holds the new files for day i (repeat the part per file).
+     */
+    @PutMapping(path = "/{trackId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<TrackResponse> update(
             @PathVariable Long trackId,
-            @Valid @RequestBody UpdateTrackRequest request,
+            @Valid @RequestPart("track") EditTrackRequest request,
+            MultipartHttpServletRequest multipartRequest,
             @AuthenticationPrincipal CustomUserDetails principal) {
 
+        List<List<MultipartFile>> filesByDay = IntStream
+                .range(0, request.days().size())
+                .mapToObj(i -> multipartRequest.getFiles("files-" + i))
+                .toList();
+
         return ResponseEntity.ok(
-                trackService.update(trackId, request, principal.getUserId())
+                trackEditService.edit(trackId, request, filesByDay, principal.getUserId())
         );
     }
 

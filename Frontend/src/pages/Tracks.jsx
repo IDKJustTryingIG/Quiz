@@ -9,6 +9,7 @@ import {
   SearchIcon,
 } from "lucide-react";
 import AddTrackDialog from "@/components/AddTrackDialog";
+import TodayCard from "@/components/TodayCard";
 import TrackSearchDropdown from "@/components/TrackSearchDropdown";
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -362,6 +363,7 @@ const Tracks = () => {
         title="All tracks"
         description="Each track is ordered, so every topic assumes only what came before it. Work down the list."
       />
+      <TodayCard />
       <div className="grid gap-6">
         <TopTracks reloadKey={reloadKey} />
         <YourTracks

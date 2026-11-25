@@ -5,8 +5,9 @@ import com.abhi.quizbackend.models.FileResponse;
 import com.abhi.quizbackend.models.TrackDetailResponse;
 import com.abhi.quizbackend.models.TrackPageResponse;
 import com.abhi.quizbackend.models.TrackResponse;
-import com.abhi.quizbackend.models.UpdateTrackRequest;
+import com.abhi.quizbackend.entity.Topic;
 import com.abhi.quizbackend.entity.Track;
+import com.abhi.quizbackend.entity.TrackTopic;
 import com.abhi.quizbackend.entity.TrackVisibility;
 import com.abhi.quizbackend.entity.User;
 import com.abhi.quizbackend.exception.DuplicateResourceException;
@@ -33,6 +34,7 @@ public class TrackService {
 
     private final TrackRepository trackRepository;
     private final UserRepository userRepository;
+    private final OrphanCleaner orphanCleaner;
 
     public TrackResponse create(
             CreateTrackRequest request,
@@ -138,35 +140,22 @@ public class TrackService {
                 .toList();
     }
 
-    public TrackResponse update(
-            Long trackId,
-            UpdateTrackRequest request,
-            Long currentUserId) {
-
-        Track track = findOwnedTrack(trackId, currentUserId);
-
-        if (!track.getSlug().equals(request.slug())
-                && trackRepository.existsBySlug(request.slug())) {
-            throw new DuplicateResourceException("slug", "Track slug already exists");
-        }
-
-        if (!track.getName().equals(request.name())) {
-            requireNameAvailable(request.name());
-        }
-
-        track.setName(request.name());
-        track.setSlug(request.slug());
-        track.setDescription(request.description());
-        track.setVisibility(request.visibility());
-
-        return toResponse(track);
-    }
-
+    /**
+     * Deletes a track the user owns, then every topic and file that only this
+     * track used. Their files leave the disk after the transaction commits.
+     */
     public void delete(
             Long trackId,
             Long currentUserId) {
 
-        trackRepository.delete(findOwnedTrack(trackId, currentUserId));
+        Track track = findOwnedTrack(trackId, currentUserId);
+        List<Topic> topics = track.getTrackTopics().stream()
+                .map(TrackTopic::getTopic)
+                .toList();
+
+        // Cascades to the track's track_topics rows.
+        trackRepository.delete(track);
+        orphanCleaner.deleteUnusedTopics(topics);
     }
 
     /** A readable track with its days and files, for the track page. */

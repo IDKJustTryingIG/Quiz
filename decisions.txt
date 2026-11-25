@@ -1,0 +1,2 @@
+I chose to make topics in a track so that they can belong to more than 1 track i.e., many-to-many relationship the reason is in the future I want to make the tracks 
+remixable into other tracks so that if a user loved a public track he can add them to his track.

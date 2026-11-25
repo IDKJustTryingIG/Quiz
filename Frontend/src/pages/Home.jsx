@@ -1,6 +1,7 @@
 import { Layers, Swords, Timer } from "lucide-react";
 import { Link } from "react-router";
 import SurfaceCard from "@/components/SurfaceCard";
+import TodayCard from "@/components/TodayCard";
 import { useAuth } from "@/lib/auth";
 const surfaces = [
   {
@@ -52,6 +53,12 @@ const Home = () => {
           >
             Log in
           </Link>
+        </div>
+      )}
+
+      {user && (
+        <div className="mt-10">
+          <TodayCard />
         </div>
       )}
 

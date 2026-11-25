@@ -84,8 +84,69 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                 Map.of(ex.getField(),ex.getMessage())));
     }
 
+    @ExceptionHandler(EnrollmentConflictException.class)
+    public ResponseEntity<ApiError> handleEnrollmentConflict(EnrollmentConflictException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiError.of(
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()));
+    }
+
+    @ExceptionHandler({ContestConflictException.class, QuizLockedException.class})
+    public ResponseEntity<ApiError> handleContestConflict(RuntimeException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiError.of(
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()));
+    }
+
     @ExceptionHandler(InvalidUploadException.class)
     public ResponseEntity<ApiError> handleInvalidUpload(InvalidUploadException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.badRequest().body(ApiError.of(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                Map.of(ex.getField(),ex.getMessage())));
+    }
+
+    @ExceptionHandler(QuizSourceException.class)
+    public ResponseEntity<ApiError> handleQuizSource(QuizSourceException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(ApiError.of(
+                HttpStatus.UNPROCESSABLE_CONTENT.value(),
+                HttpStatus.UNPROCESSABLE_CONTENT.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()));
+    }
+
+    @ExceptionHandler(QuizNotReadyException.class)
+    public ResponseEntity<ApiError> handleQuizNotReady(QuizNotReadyException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiError.of(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()));
+    }
+
+    @ExceptionHandler(QuizGenerationException.class)
+    public ResponseEntity<ApiError> handleQuizGeneration(QuizGenerationException ex,HttpServletRequest request)
+    {
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(ApiError.of(
+                HttpStatus.BAD_GATEWAY.value(),
+                HttpStatus.BAD_GATEWAY.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI()));
+    }
+
+    @ExceptionHandler(InvalidTrackEditException.class)
+    public ResponseEntity<ApiError> handleInvalidTrackEdit(InvalidTrackEditException ex,HttpServletRequest request)
     {
         return ResponseEntity.badRequest().body(ApiError.of(
                 HttpStatus.BAD_REQUEST.value(),

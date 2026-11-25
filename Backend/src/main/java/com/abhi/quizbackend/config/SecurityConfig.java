@@ -50,9 +50,13 @@ public class SecurityConfig
                                 "/api/auth/signup",
                                 "/api/auth/login",
                                 "/api/auth/refresh",
-                                "/api/auth/logout").permitAll()
+                                "/api/auth/logout",
+                                // The token in the link is the proof.
+                                "/api/email/unsubscribe"
+                                ).permitAll()
                         // Google redirect endpoints handled by Spring itself.
-                        .requestMatchers("/oauth2/**","/login/oauth2/**").permitAll()
+                        .requestMatchers("/oauth2/**","/login/oauth2/**","/api/tracks/").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         // Default deny: a new endpoint is protected unless listed above.
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
